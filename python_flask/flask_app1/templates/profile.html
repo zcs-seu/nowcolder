@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <!--该页面主要用于测试前后端传参-->
+    <!--测试Jinja2模板语法（与python很像）-->
+    <head>
+        <meta charset="UTF-8">
+        <title>flask_测试前后端传参</title>
+    </head>
+    <body>
+        profile：{{sex}} <br><!--测试前后端传参-->
+
+        {% for i in range(0,10,2) %} {# 访问元祖 #}
+            i:{{i}} <br>
+        {% endfor %}
+
+        {# 使用以#开头的单行语句访问元祖 #}
+        #for color in colors:
+            color{{loop.index}}:{{color}} <br>
+        #endfor
+
+        {% filter upper %}{# 过滤器，将小写换成大写 #}
+            {% for k,v in dict.items() %}{# 访问字典 #}
+                {{k}}:{{v}}<br>
+            {% endfor %}
+        {% endfilter %}
+
+        {% macro render_call(color) %} {# 定义宏 #}
+            This is color:{{color}}
+            {{caller()}}
+        {% endmacro %}
+
+        {% for color in colors %} {# 访问宏 #}
+            {% call render_call(color) %} <br>
+            {% endcall %}
+        {% endfor %}
+
+    </body>
+</html>
